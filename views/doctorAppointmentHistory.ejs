@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="css/doctor/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/doctor/vendor/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/doctor/vendor/themify-icons/themify-icons.min.css">
+    <link href="css/doctor/vendor/animate.css/animate.min.css" rel="stylesheet" media="screen">
+    <link href="css/doctor/vendor/perfect-scrollbar/perfect-scrollbar.min.css" rel="stylesheet" media="screen">
+    <link href="css/doctor/vendor/switchery/switchery.min.css" rel="stylesheet" media="screen">
+    <link href="css/doctor/vendor/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet" media="screen">
+    <link href="css/doctor/vendor/select2/select2.min.css" rel="stylesheet" media="screen">
+    <link href="css/doctor/vendor/bootstrap-datepicker/bootstrap-datepicker3.standalone.min.css" rel="stylesheet" media="screen">
+    <link href="css/doctor/vendor/bootstrap-timepicker/bootstrap-timepicker.min.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="css/doctor/styles.css">
+    <link rel="stylesheet" href="css/doctor/plugins.css">
+    <link rel="stylesheet" href="css/doctor/themes/theme-1.css" id="skin_color" />
+</head>
+<body>
+    <div id="app">		
+
+        <%-include('./partials/doctor/sidebar'); %>
+            <div class="app-content">
+                <%-include('./partials/doctor/header'); %>
+
+            <!-- end: TOP NAVBAR -->
+            <div class="main-content" >
+                <div class="wrap-content container" id="container">
+                    <!-- start: PAGE TITLE -->
+                    <section id="page-title">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <h1 class="mainTitle">Doctor  | Appointment History</h1>
+                                                                </div>
+                            <ol class="breadcrumb">
+                                <li>
+                                    <span>Doctor </span>
+                                </li>
+                                <li class="active">
+                                    <span>Appointment History</span>
+                                </li>
+                            </ol>
+                        </div>
+                    </section>
+                    <!-- end: PAGE TITLE -->
+                    <!-- start: BASIC EXAMPLE -->
+                    <div class="container-fluid container-fullw bg-white">
+                    
+
+                                <div class="row">
+                            <div class="col-md-12">
+                                
+                                <table class="table table-hover" id="sample-table-1">
+                                    <thead>
+                                        <tr>
+                                            <th class="center">#</th>
+                                            <th class="hidden-xs">Patient  Name</th>
+                                            <th>Specialization</th>
+                                            <th>Consultancy Fee</th>
+                                            <th>Appointment Date / Time </th>
+                                            <th>Appointment Creation Date  </th>
+                                            <th>Current Status</th>
+                                            <th>Action</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% message.forEach(function (appoint) { %>
+                                            <tr>
+                                                <td>
+                                                    <%= appoint.id %>
+                                                </td>
+                                                <td>
+                                                    <%= appoint.fullName %>
+                                                </td>
+                                                <td>
+                                                    <%= appoint.doctorSpecialization %>
+                                                </td>
+                                                <td>
+                                                    <%= appoint.consultancyFees %>
+                                                </td>
+                                                <td>
+                                                    <%= appoint.appointmentDate %> / <%= appoint.appointmentTime
+                                                            %>
+                                                </td>
+                                                <td>
+                                                    <%= appoint.postingDate %>
+                                                </td>
+                                                <% if (appoint.userStatus==1 && appoint.doctorStatus==1) {%>
+                                                    <td>Active</td>
+                                                    <td>
+                                                        <form action="/doctorCancelAppointment/<%= appoint.id %>" method="post">
+                                                            <input type="submit" value="cancel">
+                                                        </form>
+                                                        <!-- <a href="/cancelAppointment/<%= appoint.id %>">Cancel</a> -->
+                                                    </td>
+                                                    <% }else if(appoint.userStatus == 1 &&
+                                                        appoint.doctorStatus==0){ %>
+                                                        <td>Canceled by Doctor</td>
+                                                        <td>Canceled</td>
+                                                        <% } else{%>
+                                                            <td>Canceled by You</td>
+                                                            <td>Canceled</td>
+                                                            <% }}) %>
+                                            </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                            </div>
+                    
+                    <!-- end: BASIC EXAMPLE -->
+                    <!-- end: SELECT BOXES -->
+                    
+                </div>
+            </div>
+        </div>
+        <%-include('./partials/footer'); %>
+    </div>
+    <!-- start: MAIN JAVASCRIPTS -->
+    <script src="css/doctor/vendor/jquery/jquery.min.js"></script>
+    <script src="css/doctor/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="css/doctor/vendor/modernizr/modernizr.js"></script>
+    <script src="css/doctor/vendor/jquery-cookie/jquery.cookie.js"></script>
+    <script src="css/doctor/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="css/doctor/vendor/switchery/switchery.min.js"></script>
+    <!-- end: MAIN JAVASCRIPTS -->
+    <!-- start: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
+    <script src="css/doctor/vendor/maskedinput/jquery.maskedinput.min.js"></script>
+    <script src="css/doctor/vendor/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+    <script src="css/doctor/vendor/autosize/autosize.min.js"></script>
+    <script src="css/doctor/vendor/selectFx/classie.js"></script>
+    <script src="css/doctor/vendor/selectFx/selectFx.js"></script>
+    <script src="css/doctor/vendor/select2/select2.min.js"></script>
+    <script src="css/doctor/vendor/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <script src="css/doctor/vendor/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
+    <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
+    <!-- start: CLIP-TWO JAVASCRIPTS -->
+    <script src="js/doctor/main.js"></script>
+    <!-- start: JavaScript Event Handlers for this page -->
+    <script src="js/doctor/form-elements.js"></script>
+</body>
+</html>
